@@ -1,0 +1,32 @@
+{
+  "name": "@riskidev/grafana-alloy-downloader-node",
+  "version": "1.0.0",
+  "description": "An installer/wrapper to download the Grafana Alloy executable based on platform",
+  "keywords": [
+    "grafana",
+    "alloy",
+    "ci"
+  ],
+  "homepage": "https://github.com/Riskidev/Grafana-Alloy-Downloader-Node#readme",
+  "bugs": {
+    "url": "https://github.com/Riskidev/Grafana-Alloy-Downloader-Node/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Riskidev/Grafana-Alloy-Downloader-Node.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "Riskidev",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "jsdoc": "^4.0.5"
+  },
+  "dependencies": {
+    "extract-zip": "^2.0.1"
+  }
+}
