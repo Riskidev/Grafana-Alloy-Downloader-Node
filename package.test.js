@@ -1,6 +1,7 @@
-import {suite, test, beforeEach, before, afterEach} from 'node:test';
+import {suite, test, beforeEach, afterEach, before} from 'node:test';
 import assert from 'node:assert/strict';
 import {
+    __internal,
     getAssetExecutableName,
     getCacheDirectory,
     getOrSaveToCache,
@@ -21,6 +22,8 @@ await suite('grafana-alloy-downloader-node', {concurrency: false}, async () => {
 
     afterEach(() => {
         fs.rmSync(originalCacheDirectory, { recursive: true, force: true });
+        setCacheDirectory(originalCacheDirectory);
+        setVerbose(false);
     });
 
     await suite('Verbose', {concurrency: false}, () => {
@@ -92,10 +95,10 @@ await suite('grafana-alloy-downloader-node', {concurrency: false}, async () => {
         });
 
         test('WHEN extract fails THEN throws error', async (t) => {
-            t.mock.method(globalThis, 'extract', () => {
+            t.mock.method(__internal, 'extract', () => {
                 return Promise.reject(new TypeError('Extract failed'));
             });
-            await assert.rejects(getOrSaveToCache(), {message: 'Extract failed'});
+            await assert.rejects(getOrSaveToCache(), {message: 'Extraction failed: Extract failed'});
         });
 
     });

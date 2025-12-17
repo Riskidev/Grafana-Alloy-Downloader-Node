@@ -11,6 +11,11 @@ const repositoryReleaseAssetUrl = "https://github.com/grafana/alloy/releases/dow
 let cacheDirectory = path.join(process.cwd(), '.cache');
 let verbose = false;
 
+/** @internal */
+export const __internal = {
+    extract: extract
+}
+
 /**
  * Sets the directory where the downloaded asset will be cached.
  * @param directory
@@ -39,7 +44,8 @@ export function getAssetName() {
         // Only 64 bit is supported, but 32-bit Node installs can return ia32 despite the host OS being able to execute.
         return "alloy-windows-amd64.exe.zip";
     }
-    return `alloy-${platform}-${arch}.zip`;
+    const rebindArch = arch === 'x64' ? 'amd64' : arch;
+    return `alloy-${platform}-${rebindArch}.zip`;
 }
 
 /**
@@ -113,7 +119,7 @@ async function extractAsset() {
     try {
         const zipPath = path.join(cacheDirectory, getAssetName());
         logLine(`Extracting ${zipPath}`);
-        await extract(
+        await __internal.extract(
             zipPath,
             { dir: path.resolve(cacheDirectory) }
         );
