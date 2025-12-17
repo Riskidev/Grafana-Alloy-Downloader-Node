@@ -23,7 +23,7 @@ await suite('grafana-alloy-downloader-node', {concurrency: false}, async () => {
         fs.rmSync(originalCacheDirectory, { recursive: true, force: true });
     });
 
-    await suite('Verbose', {concurrency: false, skip: true}, () => {
+    await suite('Verbose', {concurrency: false}, () => {
 
         /** @type {import('node:test').Mock} */
         let consoleLogMock;
@@ -45,7 +45,7 @@ await suite('grafana-alloy-downloader-node', {concurrency: false}, async () => {
 
     });
 
-    await suite('Cache', {concurrency: false, skip: true}, () => {
+    await suite('Cache', {concurrency: false}, () => {
 
         const tempDirectory = path.join(process.cwd(), 'TEMP');
 
