@@ -21,11 +21,14 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info"
+    "test:coverage": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info",
+    "generate:tsc": "npx tsc index.js --declaration --allowJs --emitDeclarationOnly --stripInternal",
+    "postgenerate:tsc": "npx rimraf ./utils.d.ts"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "jsdoc": "^4.0.5"
+    "jsdoc": "^4.0.5",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "extract-zip": "^2.0.1"

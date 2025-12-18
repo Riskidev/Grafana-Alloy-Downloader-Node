@@ -1,8 +1,6 @@
 import {suite, test, beforeEach, afterEach, before} from 'node:test';
 import assert from 'node:assert/strict';
 import {
-    __internal,
-    getAssetExecutableName,
     getCacheDirectory,
     getOrSaveToCache,
     isPlatformSupported,
@@ -11,6 +9,7 @@ import {
 } from "./index.js";
 import * as fs from "node:fs";
 import path from "node:path";
+import {__internal, getAssetExecutableName} from "./utils.js";
 
 await suite('grafana-alloy-downloader-node', {concurrency: false}, async () => {
 

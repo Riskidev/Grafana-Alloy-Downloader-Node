@@ -4,17 +4,12 @@ import * as fs from "node:fs";
 import {pipeline} from "node:stream/promises";
 import {createWriteStream} from "node:fs";
 import {Transform} from "node:stream";
-import extract from "extract-zip";
 import {unlink} from "node:fs/promises";
+import {__internal, getAssetExecutableName, getAssetName} from "./utils.js";
 
 const repositoryReleaseAssetUrl = "https://github.com/grafana/alloy/releases/download/v1.12.1"
 let cacheDirectory = path.join(process.cwd(), '.cache');
 let verbose = false;
-
-/** @internal */
-export const __internal = {
-    extract: extract
-}
 
 /**
  * Sets the directory where the downloaded asset will be cached.
@@ -31,30 +26,6 @@ export function setCacheDirectory(directory) {
  */
 export function getCacheDirectory() {
     return cacheDirectory;
-}
-
-/**
- * Returns the name of the asset to download.
- * @internal
- * @returns {string}
- */
-export function getAssetName() {
-    const [platform, arch] = [process.platform, process.arch];
-    if (platform === 'win32') {
-        // Only 64 bit is supported, but 32-bit Node installs can return ia32 despite the host OS being able to execute.
-        return "alloy-windows-amd64.exe.zip";
-    }
-    const rebindArch = arch === 'x64' ? 'amd64' : arch;
-    return `alloy-${platform}-${rebindArch}.zip`;
-}
-
-/**
- * Returns the name of the executable file in the downloaded asset.
- * @internal
- * @returns {string}
- */
-export function getAssetExecutableName() {
-    return path.basename(getAssetName(), '.zip');
 }
 
 /**
@@ -174,6 +145,18 @@ export async function getOrSaveToCache() {
     return path.resolve(path.join(cacheDirectory, assetExecutableName));
 }
 
+/**
+ * When true, enables console output.
+ * @param isVerbose
+ */
 export function setVerbose(isVerbose) {
     verbose = isVerbose;
+}
+
+export default {
+    getCacheDirectory,
+    setCacheDirectory,
+    isPlatformSupported,
+    getOrSaveToCache,
+    setVerbose,
 }
