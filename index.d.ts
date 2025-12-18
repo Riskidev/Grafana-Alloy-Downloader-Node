@@ -11,9 +11,9 @@ export function setCacheDirectory(directory: any): void;
 export function getCacheDirectory(): string;
 /**
  * Checks if the current platform is supported.
- * @returns {*}
+ * @returns {boolean}
  */
-export function isPlatformSupported(): any;
+export function isPlatformSupported(): boolean;
 /**
  * Downloads the Grafana Alloy executable to the cache directory if it's not already present.
  * @returns {Promise<string>} Path to Grafana Alloy executable

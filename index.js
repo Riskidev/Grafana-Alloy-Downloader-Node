@@ -102,7 +102,7 @@ async function extractAsset() {
 
 /**
  * Checks if the current platform is supported.
- * @returns {*}
+ * @returns {boolean}
  */
 export function isPlatformSupported() {
     const platform = process.platform;
