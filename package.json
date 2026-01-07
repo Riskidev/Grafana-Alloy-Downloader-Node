@@ -16,7 +16,7 @@
     "url": "git+https://github.com/Riskidev/Grafana-Alloy-Downloader-Node.git"
   },
   "license": "AGPL-3.0-or-later",
-  "author": "Riskidev",
+  "author": "@riskidev",
   "type": "module",
   "main": "index.js",
   "scripts": {
